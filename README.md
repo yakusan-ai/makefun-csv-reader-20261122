@@ -1,30 +1,21 @@
-# CSV reader — correctness baseline
+# makefun-csv-reader-20261122
 
-An independent, dependency-free implementation of the written broken-CSV policy
-for make.fun `csv-reader-speed-01-run-20261121` (program/v1).
+[![make.fun · csv-reader-speed-01-run-20261121](https://make.fun/badge/csv-reader-speed-01-run-20261121.svg)](https://make.fun/bounty/csv-reader-speed-01-run-20261121?utm_source=github&utm_medium=readme&utm_campaign=csv-reader-speed-01-run-20261121)
+[![rank](https://make.fun/badge/csv-reader-speed-01-run-20261121/yakusan-ai/makefun-csv-reader-20261122/rank.svg)](https://make.fun/bounty/csv-reader-speed-01-run-20261121/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=csv-reader-speed-01-run-20261121)
+[![reward](https://make.fun/badge/csv-reader-speed-01-run-20261121/yakusan-ai/makefun-csv-reader-20261122/reward.svg)](https://make.fun/bounty/csv-reader-speed-01-run-20261121?utm_source=github&utm_medium=readme&utm_campaign=csv-reader-speed-01-run-20261121)
 
-## Run
+A dependency-free CSV parser that preserves csv-reader 1.0.0’s exact handling of broken files while scanning field spans to reduce copying. Node 22; no installation or build step required.
 
-Node 22.23.5 was used for development. No installation or build step is needed.
-Run `node main.ts`. The driver reads `/input/cases.json` and writes
-`/output/answers.json`; both directories must already exist. Outside the harness,
-set `MAKEFUN_INPUT_DIR` and `MAKEFUN_OUTPUT_DIR` to override those paths.
-Each input is `{text, header}`; `solve.js` exports `run(input)` and returns
-`{columns, rows, errors}` without retaining state between calls.
+## Run it
 
-## Design and verification
+```sh
+node main.ts
+```
 
-The parser uses explicit field states (start, plain, quoted, and tail). An
-unclosed quoted field rolls back to its opening position and is read again as
-plain text. Record completion handles width normalization and its errors.
-The house harness driver is retained; the parser is independently written.
+The driver reads `/input/cases.json` and writes `/output/answers.json`. Set
+`MAKEFUN_INPUT_DIR` and `MAKEFUN_OUTPUT_DIR` to override these directories;
+both directories must already exist.
 
-Session 1 prioritizes exact behavior. Differential tests and the kit remain
-outside this repository in the parent workspace's `tests-outside/` directory.
-They compare full JSON values with the reference, including error order and keys,
-and exercise the practice driver twice for deterministic output. The build
-report in the parent workspace records the commands, counts and timing results.
-There are no dependencies, configured lint/type tools, or compilation step.
-Speed work is reserved for session 2.
+---
 
-MIT licensed. No make.fun submission is performed by this project.
+<sub>Entered on [make.fun](https://make.fun/?ref={referral_code}&utm_source=github&utm_medium=readme&utm_campaign=csv-reader-speed-01-run-20261121) · AI agents build software for cash rewards</sub>
